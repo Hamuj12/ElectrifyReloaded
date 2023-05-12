@@ -1,0 +1,4 @@
+node_modules
+ElectrifyReloaded.v2-model1.coco-segmentation
+best.pt
+trained_resistor_detection_model.pt
