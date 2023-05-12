@@ -17,26 +17,17 @@ export default function App() {
     });
 
     if (!result.canceled) {
-      setImage(result.uri);
+      setImage(result.assets[0].uri);
     }
   };
 
   const processImage = async () => {
     setLoading(true);
-    let formData = new FormData();
-    formData.append("image", {
-      uri: image,
-      type: "image/jpeg", //or photo.type
-      name: "testPhoto.jpg",
-    });
+    const base64 = await uriToBase64(image);
     axios
-      .post("http://192.168.68.62:5000/predict", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post("http://192.168.68.62:5000/predict", { image: base64 })
       .then((response) => {
-        const base64Result = response.data.result;
+        const base64Result = response.data.image;
         setImage(`data:image/jpeg;base64,${base64Result}`);
       })
       .catch((error) => {
