@@ -27,7 +27,7 @@ export default function App() {
     setLoading(true);
     const base64 = await uriToBase64(image);
     axios
-      .post("http://192.168.68.62:5000/predict", { image: base64 })
+      .post("http://10.146.36.22:5000/predict", { image: base64 })
       .then((response) => {
         const base64Result = response.data.image;
         const croppedImages = response.data.cropped_images;
